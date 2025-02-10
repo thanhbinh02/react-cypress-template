@@ -19,11 +19,10 @@ describe("Pickup Point Management", () => {
       })
       .then((data) => {
         loginData = data;
-        cy.loginAndVisit(
-          loginData.validUser.email,
-          loginData.validUser.password,
-          pickupPointData.path
-        );
+        cy.visit(pickupPointData.path);
+        cy.get("#email").type(loginData.validUser.email);
+        cy.get("#password").type(loginData.validUser.password);
+        cy.get('button[type="submit"]').click();
       });
 
     // Đợi API trả về status 200 trước khi chạy test case

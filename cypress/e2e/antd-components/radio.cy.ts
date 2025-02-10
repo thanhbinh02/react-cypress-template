@@ -1,3 +1,6 @@
+// @ts-check
+/// <reference types="cypress" />
+
 describe("Ant Design Radio", () => {
   it("Displays the Radio buttons and allows selection", () => {
     cy.get('.ant-radio-group[id="keyOfFieldForm"]')
