@@ -1,9 +1,12 @@
+// @ts-check
+/// <reference types="cypress" />
+
 describe("Ant Design Input", () => {
   it("Displays the Input and allows typing", () => {
     cy.get('.ant-input[id="keyOfFieldForm"]')
       .should("be.visible")
-      .type("Hello, Thanh Binh!")
-      .should("have.value", "Hello, Thanh Binh!");
+      .type("textWantToType")
+      .should("have.value", "textWantToType");
   });
 
   // Verify placeholder
