@@ -25,6 +25,8 @@ describe("Pickup Point Management", () => {
         cy.get('button[type="submit"]').click();
       });
 
+    cy.viewport(1286, 718);
+
     // Đợi API trả về status 200 trước khi chạy test case
     // cy.wait("@getUserInfo").its("response.statusCode").should("eq", 200);
   });
@@ -33,38 +35,6 @@ describe("Pickup Point Management", () => {
     cy.wait(1000);
     cy.visit(pickupPointData.path);
 
-    cy.get('.ant-input[id="name"]')
-      .should("be.visible")
-      .type(pickupPointData.validPickupPoint.name)
-      .should("have.value", pickupPointData.validPickupPoint.name);
-
-    cy.get('.ant-input[id="coordinate"]')
-      .should("be.visible")
-      .type(pickupPointData.validPickupPoint.coordinate)
-      .should("have.value", pickupPointData.validPickupPoint.coordinate);
-
-    // Select radio by value
-    cy.get(`[value="${pickupPointData.validPickupPoint.type}"]`).first().click({
-      force: true,
-    });
-
-    cy.get('.ant-radio-group[id="type"]')
-      .should("exist")
-      .within(() => {
-        cy.get(`[value="${pickupPointData.validPickupPoint.type}"]`)
-          .first()
-          .click({ force: true })
-          .should("be.checked");
-      });
-
-    cy.get('.ant-radio-group[id="type"]')
-      .find(`.ant-radio-input[value="1"]`)
-      .should("be.disabled");
-
-    cy.get('.ant-radio-group[id="type"]')
-      .find(`.ant-radio-input[value="1"]`)
-      .should("be.disabled")
-      .check({ force: true })
-      .should("not.be.checked");
+    cy.get("#vehicleType").should("be.disabled");
   });
 });

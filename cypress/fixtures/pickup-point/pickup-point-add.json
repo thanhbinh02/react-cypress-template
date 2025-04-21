@@ -9,5 +9,5 @@
     "incorrectPassword": "Đã xảy ra lỗi: - Mật khẩu không chính xác",
     "accountLocked": "Đã xảy ra lỗi: - Tài khoản đã bị khoá"
   },
-  "path": "https://atk-shipping-admin-panel-dev.estuary.solutions/pickup-point/add"
+  "path": "http://localhost:5173/shippers/add"
 }

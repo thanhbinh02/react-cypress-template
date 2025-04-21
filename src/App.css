@@ -40,3 +40,95 @@
 .read-the-docs {
   color: #888;
 }
+
+.app-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.button-group {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.button-group button {
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+/* Message positioning */
+.ant-message {
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1010;
+}
+
+.ant-message-top {
+  top: 8px;
+}
+
+.ant-message-bottom {
+  top: auto;
+  bottom: 8px;
+}
+
+/* Message notice styles */
+.ant-message-notice {
+  padding: 8px;
+  margin-bottom: 8px;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.ant-message-notice-close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.ant-message-notice-close:hover {
+  color: rgba(0, 0, 0, 0.75);
+}
+
+/* Message type styles */
+.ant-message-success {
+  color: #52c41a;
+}
+
+.ant-message-error {
+  color: #ff4d4f;
+}
+
+.ant-message-warning {
+  color: #faad14;
+}
+
+.ant-message-info {
+  color: #1890ff;
+}
+
+.ant-message-loading {
+  color: #1890ff;
+}
+
+.ant-message-loading-icon {
+  margin-right: 8px;
+  animation: loadingCircle 1s infinite linear;
+}
+
+@keyframes loadingCircle {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
