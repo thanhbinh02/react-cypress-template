@@ -11,6 +11,7 @@ const HomePage = () => {
         Go to Message Showcase
       </Button>
       <Button onClick={() => navigate("/button")}>Go to Button Showcase</Button>
+      <Button onClick={() => navigate("/input")}>Go to Input Showcase</Button>
     </div>
   );
 };

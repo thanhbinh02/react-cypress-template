@@ -5,6 +5,7 @@ import MessageShowcasePage from "./pages/message-showcase-page";
 import "./App.css";
 import HomePage from "./pages/home";
 import ButtonShowcasePage from "./pages/button-showcase-page";
+import InputShowcasePage from "./pages/input-showcase-page";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/message" element={<MessageShowcasePage />} />
         <Route path="/button" element={<ButtonShowcasePage />} />
+        <Route path="/input" element={<InputShowcasePage />} />
       </Routes>
     </Router>
   );
