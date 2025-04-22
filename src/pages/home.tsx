@@ -1,17 +1,21 @@
-import { Button } from "antd";
-import { useNavigate } from "react-router-dom";
+import { Button } from 'antd';
+import { useNavigate } from 'react-router-dom';
 
 const HomePage = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="app-container">
+    <div className='app-container'>
       <h1>Welcome</h1>
-      <Button onClick={() => navigate("/message")}>
+      <Button onClick={() => navigate('/message')}>
         Go to Message Showcase
       </Button>
-      <Button onClick={() => navigate("/button")}>Go to Button Showcase</Button>
-      <Button onClick={() => navigate("/input")}>Go to Input Showcase</Button>
+      <Button onClick={() => navigate('/button')}>Go to Button Showcase</Button>
+      <Button onClick={() => navigate('/input')}>Go to Input Showcase</Button>
+      <Button onClick={() => navigate('/tooltip')}>
+        Go to Tooltip Showcase
+      </Button>
+      <Button onClick={() => navigate('/tag')}>Go to Tag Showcase</Button>
     </div>
   );
 };
