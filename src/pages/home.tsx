@@ -10,6 +10,7 @@ const HomePage = () => {
       <Button onClick={() => navigate("/message")}>
         Go to Message Showcase
       </Button>
+      <Button onClick={() => navigate("/button")}>Go to Button Showcase</Button>
     </div>
   );
 };
