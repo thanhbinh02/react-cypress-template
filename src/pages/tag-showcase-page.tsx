@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { CloseOutlined, TwitterOutlined } from '@ant-design/icons';
 
 const initialTags = [
-  { id: 1, text: 'Success Tag', color: 'success', closable: true },
-  { id: 2, text: 'Error Tag', color: 'error', closable: false },
+  { id: 1, text: 'Success', color: 'success', closable: true },
+  { id: 2, text: 'Error', color: 'error', closable: false },
   { id: 3, text: 'Processing', color: 'processing', closable: true },
-  { id: 4, text: 'Link', link: 'google.com', closable: true },
-  { id: 5, text: 'Close Icon', closeIcon: <CloseOutlined />, closable: true },
-  { id: 6, text: 'Icon Tag', icon: <TwitterOutlined />, closable: true },
+  { id: 4, text: 'Warning', color: 'warning', closable: false },
+  { id: 5, text: 'Default', color: 'default', closable: false },
+  { id: 6, text: 'Link', link: 'google.com', closable: true },
+  { id: 7, text: 'Close Icon', closeIcon: <CloseOutlined />, closable: true },
+  { id: 8, text: 'Icon Tag', icon: <TwitterOutlined /> },
 ];
 
 const TagShowcasePage = () => {
