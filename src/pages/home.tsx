@@ -12,10 +12,7 @@ const HomePage = () => {
       </Button>
       <Button onClick={() => navigate('/button')}>Go to Button Showcase</Button>
       <Button onClick={() => navigate('/input')}>Go to Input Showcase</Button>
-      <Button onClick={() => navigate('/tooltip')}>
-        Go to Tooltip Showcase
-      </Button>
-      <Button onClick={() => navigate('/tag')}>Go to Tag Showcase</Button>
+      <Button onClick={() => navigate('/radio')}>Go to Radio Showcase</Button>
     </div>
   );
 };
