@@ -1,0 +1,41 @@
+{
+  "fields": [
+    {
+      "name": "note",
+      "required": true,
+      "initialValue": "Hello world!"
+    },
+    {
+      "name": "gender",
+      "required": true,
+      "initialValue": 1
+    },
+    {
+      "name": "age",
+      "required": false,
+      "initialValue": "a"
+    }
+  ],
+  "buttons": [
+    { "text": "Submit" },
+    { "text": "Reset" },
+    { "text": "Fill form" }
+  ],
+  "autoFillData": {
+    "note": "Hello world!",
+    "age": "a",
+    "gender": 1
+  },
+  "nameForm": "",
+  "path": "http://localhost:5173/form",
+  "genders": {
+    "1": "Male",
+    "2": "Female",
+    "3": "Female"
+  },
+  "submitData": {
+    "note": "This is note!",
+    "age": "b",
+    "gender": 2
+  }
+}
