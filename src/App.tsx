@@ -5,6 +5,8 @@ import MessageShowcasePage from "./pages/message-showcase-page";
 import "./App.css";
 import HomePage from "./pages/home";
 import ButtonShowcasePage from "./pages/button-showcase-page";
+import TooltipShowcasePage from "./pages/tooltip-showcase-page";
+import TagShowcasePage from "./pages/tag-showcase-page";
 import InputShowcasePage from "./pages/input-showcase-page";
 import RadioShowcasePage from "./pages/radio-showcase-page";
 import SelectShowcasePage from "./pages/select-showcase-page";
@@ -25,6 +27,8 @@ function App() {
         <Route path="/switch" element={<SwitchShowcasePage />} />
         <Route path="/card" element={<CardShowcasePage />} />
         <Route path="/form" element={<FormShowcasePage />} />
+        <Route path="/tooltip" element={<TooltipShowcasePage />} />
+        <Route path="/tag" element={<TagShowcasePage />} />
       </Routes>
     </Router>
   );
