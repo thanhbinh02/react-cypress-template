@@ -1,151 +1,163 @@
 // @ts-check
 /// <reference types="cypress" />
 
+import { checkInputProps } from "../../support/inputTestUtils";
+
+const selectorInput = {
+  root: '[data-testid="input-showcase"]',
+  basic: "#basicInput",
+  disabled: "#disabledInput",
+  readOnly: "#readOnlyInput",
+  large: "#largeInput",
+  medium: "#mediumInput",
+  small: "#smallInput",
+  password: "#passwordInput",
+  number: "#numberInput",
+  email: "#emailInput",
+  prefix: "#prefixInput",
+  suffix: "#suffixInput",
+  addonBefore: "#addonBeforeInput",
+  addonAfter: "#addonAfterInput",
+  error: "#errorInput",
+  warning: "#warningInput",
+  clearable: "#clearableInput",
+};
+
 describe("Ant Design Input Component", () => {
   beforeEach(() => {
     cy.visit("http://localhost:5173/input");
   });
 
+  it("renders all inputs", () => {
+    cy.get(selectorInput.root).find("input").should("have.length.at.least", 10);
+  });
+
   describe("Basic Input Functionality", () => {
     it("should display input and allow typing", () => {
-      cy.get('.ant-input[id="basicInput"]')
-        .should("be.visible")
-        .type("Hello World")
-        .should("have.value", "Hello World");
+      checkInputProps(selectorInput.basic, {
+        testTyping: "Hello World",
+      });
     });
 
     it("should display input with placeholder", () => {
-      cy.get('.ant-input[id="basicInput"]').should(
-        "have.attr",
-        "placeholder",
-        "Basic Input"
-      );
+      checkInputProps(selectorInput.basic, {
+        placeholder: "Basic Input",
+      });
     });
 
     it("should display disabled input", () => {
-      cy.get('.ant-input[id="disabledInput"]')
-        .should("be.visible")
-        .and("be.disabled")
-        .and("have.attr", "disabled");
+      checkInputProps(selectorInput.disabled, {
+        disabled: true,
+      });
     });
 
     it("should display read-only input", () => {
-      cy.get('.ant-input[id="readOnlyInput"]')
-        .should("be.visible")
-        .and("have.attr", "readonly");
+      checkInputProps(selectorInput.readOnly, {
+        readOnly: true,
+      });
+    });
+
+    it("should have default value for read-only input", () => {
+      checkInputProps(selectorInput.readOnly, {
+        defaultValue: "Read only",
+        readOnly: true,
+      });
     });
   });
 
   describe("Input Sizes", () => {
     it("should display large input", () => {
-      cy.get('.ant-input-lg[id="largeInput"]')
-        .should("be.visible")
-        .and("have.class", "ant-input-lg")
-        .and("have.css", "height", "40px");
+      checkInputProps(selectorInput.large, {
+        sizeClass: "large",
+      });
     });
 
     it("should display medium input", () => {
-      cy.get('.ant-input[id="mediumInput"]')
-        .should("be.visible")
-        .and("have.css", "height", "32px");
+      checkInputProps(selectorInput.medium, {
+        sizeClass: "middle",
+      });
     });
 
     it("should display small input", () => {
-      cy.get('.ant-input-sm[id="smallInput"]')
-        .should("be.visible")
-        .and("have.class", "ant-input-sm")
-        .and("have.css", "height", "24px");
+      checkInputProps(selectorInput.small, {
+        sizeClass: "small",
+      });
     });
   });
 
   describe("Input Types", () => {
     it("should display password input", () => {
-      cy.get('.ant-input[id="passwordInput"]')
-        .should("be.visible")
-        .and("have.attr", "type", "password");
+      checkInputProps(selectorInput.password, {
+        type: "password",
+      });
     });
 
     it("should display number input", () => {
-      cy.get('.ant-input[id="numberInput"]')
-        .should("be.visible")
-        .and("have.attr", "type", "number");
+      checkInputProps(selectorInput.number, {
+        type: "number",
+      });
     });
 
     it("should display email input", () => {
-      cy.get('.ant-input[id="emailInput"]')
-        .should("be.visible")
-        .and("have.attr", "type", "email");
+      checkInputProps(selectorInput.email, {
+        type: "email",
+      });
     });
   });
 
   describe("Input with Prefix/Suffix", () => {
     it("should display input with prefix", () => {
-      cy.get("#prefixInput")
-        .parents(".ant-input-affix-wrapper")
-        .should("be.visible")
-        .within(() => {
-          cy.get(".ant-input-prefix").should("be.visible");
-        });
+      checkInputProps(selectorInput.prefix, {
+        prefix: true,
+      });
     });
 
     it("should display input with suffix", () => {
-      cy.get("#suffixInput")
-        .parents(".ant-input-affix-wrapper")
-        .should("be.visible")
-        .within(() => {
-          cy.get(".ant-input-suffix").should("be.visible");
-        });
+      checkInputProps(selectorInput.suffix, {
+        suffix: true,
+      });
     });
   });
 
   describe("Input with Addon", () => {
     it("should display input with addon before", () => {
-      cy.get("#addonBeforeInput")
-        .parents(".ant-input-group")
-        .should("be.visible")
-        .within(() => {
-          cy.get(".ant-input-group-addon").first().should("be.visible");
-        });
+      checkInputProps(selectorInput.addonBefore, {
+        addonBefore: true,
+      });
     });
 
     it("should display input with addon after", () => {
-      cy.get("#addonAfterInput")
-        .parents(".ant-input-group")
-        .should("be.visible")
-        .within(() => {
-          cy.get(".ant-input-group-addon").last().should("be.visible");
-        });
+      checkInputProps(selectorInput.addonAfter, {
+        addonAfter: true,
+      });
     });
   });
 
   describe("Input Status", () => {
     it("should display input with error status", () => {
-      cy.get('.ant-input-status-error[id="errorInput"]')
-        .should("be.visible")
-        .and("have.class", "ant-input-status-error");
+      checkInputProps(selectorInput.error, {
+        statusError: true,
+      });
     });
 
     it("should display input with warning status", () => {
-      cy.get('.ant-input-status-warning[id="warningInput"]')
-        .should("be.visible")
-        .and("have.class", "ant-input-status-warning");
+      checkInputProps(selectorInput.warning, {
+        statusWarning: true,
+      });
     });
   });
 
   describe("Input Interactions", () => {
-    it("should clear input value when clear button is clicked", () => {
-      cy.get('.ant-input[id="clearableInput"]')
-        .type("Clear me")
-        .get(".ant-input-clear-icon")
-        .click()
-        .should("have.value", "");
+    it("should clear input value with clear icon", () => {
+      checkInputProps(selectorInput.clearable, {
+        clearable: true,
+      });
     });
 
     it("should show password when eye icon is clicked", () => {
-      cy.get('.ant-input[id="passwordInput"]').as("passwordInput");
-      cy.get("@passwordInput").type("password123");
-      cy.get(".ant-input-password-icon").click();
-      cy.get("@passwordInput").should("have.attr", "type", "text");
+      checkInputProps(selectorInput.password, {
+        passwordEye: true,
+      });
     });
   });
 });

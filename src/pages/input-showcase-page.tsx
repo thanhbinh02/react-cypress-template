@@ -9,18 +9,13 @@ import { Input } from "antd";
 const InputShowcasePage = () => {
   return (
     <div
+      data-testid="input-showcase"
       style={{ padding: 20, display: "flex", flexDirection: "column", gap: 16 }}
     >
-      {/* Basic Input */}
       <Input id="basicInput" placeholder="Basic Input" />
-
-      {/* Disabled Input */}
       <Input id="disabledInput" placeholder="Disabled Input" disabled />
-
-      {/* Read Only Input */}
       <Input id="readOnlyInput" defaultValue="Read only" readOnly />
 
-      {/* Sizes */}
       <Input
         id="largeInput"
         size="large"
@@ -35,7 +30,6 @@ const InputShowcasePage = () => {
         className="ant-input-sm"
       />
 
-      {/* Input Types */}
       <Input.Password
         id="passwordInput"
         placeholder="Password"
@@ -46,7 +40,6 @@ const InputShowcasePage = () => {
       <Input type="number" id="numberInput" placeholder="Number" />
       <Input type="email" id="emailInput" placeholder="Email" />
 
-      {/* Prefix / Suffix */}
       <Input id="prefixInput" placeholder="Prefix" prefix={<UserOutlined />} />
       <Input
         id="suffixInput"
@@ -54,7 +47,6 @@ const InputShowcasePage = () => {
         suffix={<EyeOutlined />}
       />
 
-      {/* Addon Before / After */}
       <Input
         addonBefore="https://"
         id="addonBeforeInput"
@@ -62,7 +54,6 @@ const InputShowcasePage = () => {
       />
       <Input addonAfter=".com" id="addonAfterInput" />
 
-      {/* Status */}
       <Input
         id="errorInput"
         status="error"
@@ -76,7 +67,6 @@ const InputShowcasePage = () => {
         className="ant-input-status-warning"
       />
 
-      {/* Clearable Input */}
       <Input id="clearableInput" allowClear placeholder="Clearable Input" />
     </div>
   );
