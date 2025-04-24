@@ -1,46 +1,108 @@
+import dayjs from 'dayjs';
 /// <reference types="cypress" />
 
-describe('Ant Design DatePicker', () => {
+describe('DatePicker Showcase', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('http://localhost:5173/date-picker');
   });
 
-  const inputSelector = '[data-testid="login-datepicker"]';
+  afterEach(() => {
+    cy.get('body').click(0, 0); // Click ra ngoài để đóng DatePicker
+  });
+
+  it('Selects a date in DatePicker', () => {
+    cy.get('[data-testid="datepicker"]').click();
+    cy.get('.ant-picker-cell-inner')
+      .not('.ant-picker-cell-disabled')
+      .contains(/^25$/)
+      .click();
+
+    cy.get('[data-testid="datepicker"]').should('have.value', '2025-04-25');
+  });
+
+  it('Selects a specific month and year', () => {
+    cy.get('[data-testid="datepicker"]').click();
+
+    cy.get('.ant-picker-header-view button').eq(1).click();
+    cy.get('.ant-picker-year-panel .ant-picker-cell')
+      .contains('2025')
+      .should('be.visible')
+      .click();
+
+    cy.get('.ant-picker-month-panel .ant-picker-cell')
+      .contains('Sep')
+      .should('be.visible')
+      .click();
+
+    cy.get('.ant-picker-cell-inner')
+      .not('.ant-picker-cell-disabled')
+      .contains(/^25$/)
+      .click();
+
+    cy.get('[data-testid="datepicker"]').should('have.value', '2025-09-25');
+  });
+
+  it('Clears selected date', () => {
+    cy.get('[data-testid="datepicker"]').click();
+    cy.get('.ant-picker-cell-inner')
+      .not('.ant-picker-cell-disabled')
+      .contains(/^29$/)
+      .click();
+    cy.get('[data-testid="datepicker"]').should('not.have.value', '');
+
+    cy.get('[data-testid="clear-btn"]').click();
+    cy.get('[data-testid="datepicker"]').should('have.value', '');
+  });
+
+  it('Disables past dates and prevents selection', () => {
+    const pastDay = dayjs().subtract(1, 'day').date();
+    cy.get('[data-testid="datepicker"]').click();
+    cy.get('.ant-picker-cell-disabled .ant-picker-cell-inner')
+      .contains(new RegExp(`^${pastDay}$`))
+      .click({ force: true });
+
+    cy.get('[data-testid="datepicker"]').should('have.value', '');
+  });
 
   it('Checks if the DatePicker is visible', () => {
-    cy.get(inputSelector).should('be.visible');
+    cy.get('[data-testid="datepicker"]').should('be.visible');
   });
 
-  // Open DatePicker, select the 15th day and verify date
-  it('Selects a date in DatePicker', () => {
-    cy.get(inputSelector).click({ force: true });
-    cy.get('.ant-picker-cell').contains('15').click({ force: true });
-    cy.get(inputSelector).should('have.value', '2025-03-15');
+  it('Selects a week in DatePicker with picker="week"', () => {
+    cy.get('[data-testid="datepicker-week"]').click();
+    cy.get('.ant-picker-week-panel-row').eq(3).click();
+    cy.get('[data-testid="datepicker-week"] ').should(
+      'have.value',
+      '2025-17th'
+    );
   });
 
-  // Open DatePicker, select year, month, day and verify date
-  it('Selects a specific month and year', () => {
-    cy.get(inputSelector).click({ force: true });
-    cy.get('.ant-picker-year-btn').click({ force: true });
-    cy.get('.ant-picker-cell').contains('2025').click({ force: true });
-    cy.get('.ant-picker-cell').contains('Mar').click({ force: true });
-    cy.get('.ant-picker-cell').contains('15').click({ force: true });
-    cy.get(inputSelector).should('have.value', '2025-03-15');
+  it('Selects a month in DatePicker with picker="month"', () => {
+    cy.get('[data-testid="datepicker-month"]').click();
+    cy.get('.ant-picker-month-panel .ant-picker-cell').contains('Sep').click();
+    cy.get('[data-testid="datepicker-month"] ').should('have.value', '2025-09');
   });
 
-  // Check clear the date
-  it('Clears selected date', () => {
-    cy.get(inputSelector).click({ force: true });
-    cy.get('.ant-picker-cell').contains('20').click({ force: true });
-    cy.get('.ant-picker-clear').click({ force: true });
-    cy.get(inputSelector).should('have.value', '');
+  it('Selects a quarter in DatePicker with picker="quarter"', () => {
+    cy.get('[data-testid="datepicker-quarter"]').click();
+    cy.get('.ant-picker-quarter-panel .ant-picker-cell').contains('Q2').click();
+    cy.get('[data-testid="datepicker-quarter"] ').should(
+      'have.value',
+      '2025-Q2'
+    );
   });
 
-  // Check if the DatePicker allows selection of disabled dates
-  it('Disables past dates and prevents selection', () => {
-    cy.get(inputSelector).click();
-    cy.get('.ant-picker-cell-disabled').should('exist');
-    cy.get('.ant-picker-cell-disabled').first().click({ force: true });
-    cy.get(inputSelector).should('have.value', '');
+  it('Selects a year in DatePicker with picker="year"', () => {
+    cy.get('[data-testid="datepicker-year"]').click();
+    cy.get('.ant-picker-year-panel .ant-picker-cell').contains('2025').click();
+    cy.get('[data-testid="datepicker-year"] ').should('have.value', '2025');
+  });
+
+  it('Renders DatePicker with small size and selects a date', () => {
+    cy.get('[data-testid="datepicker-small"]').closest('.ant-picker-small');
+  });
+
+  it('Renders DatePicker with large size and selects a date', () => {
+    cy.get('[data-testid="datepicker-large"]').closest('.ant-picker-large');
   });
 });

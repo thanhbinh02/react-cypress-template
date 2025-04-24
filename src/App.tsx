@@ -14,6 +14,10 @@ import SwitchShowcasePage from './pages/switch-showcase-page';
 import CardShowcasePage from './pages/card-showcase-page';
 import FormShowcasePage from './pages/form-showcase-page';
 import InputNumberShowcasePage from './pages/input-number-showcase-page';
+import PopConfirmShowcasePage from './pages/pop-confirm-showcase-page';
+import SpinShowcasePage from './pages/spin-showcase-page';
+import CheckboxShowcasePage from './pages/checkbox-showcase-page';
+import DatePickerShowcasePage from './pages/date-picker-showcase-page';
 
 function App() {
   return (
@@ -31,6 +35,10 @@ function App() {
         <Route path='/tooltip' element={<TooltipShowcasePage />} />
         <Route path='/tag' element={<TagShowcasePage />} />
         <Route path='/input-number' element={<InputNumberShowcasePage />} />
+        <Route path='/pop-confirm' element={<PopConfirmShowcasePage />} />
+        <Route path='/spin' element={<SpinShowcasePage />} />
+        <Route path='/checkbox' element={<CheckboxShowcasePage />} />
+        <Route path='/date-picker' element={<DatePickerShowcasePage />} />
       </Routes>
     </Router>
   );

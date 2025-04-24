@@ -36,4 +36,22 @@
 //   }
 // }
 
-export {};
+Cypress.Commands.add(
+  'typeAndBlur',
+  { prevSubject: 'element' },
+  (subject, value: string) => {
+    cy.wrap(subject).clear().type(value).blur();
+  }
+);
+
+Cypress.Commands.add(
+  'shouldHaveValue',
+  { prevSubject: 'element' },
+  (
+    subject,
+    expectedValue: string | number,
+    matcher: keyof Chai.Assertion | undefined = 'value'
+  ) => {
+    cy.wrap(subject).should(`have.${matcher}`, expectedValue);
+  }
+);

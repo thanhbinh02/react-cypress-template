@@ -1,9 +1,6 @@
 import { InputNumber, Space } from 'antd';
-import { useState } from 'react';
 
 const InputNumberShowcasePage = () => {
-  const [value, setValue] = useState<number | null>(null);
-
   return (
     <Space
       direction='vertical'
@@ -17,8 +14,10 @@ const InputNumberShowcasePage = () => {
       {/* Disabled */}
       <InputNumber data-testid='disabled' defaultValue={10} disabled />
 
-      {/* Controlled value */}
-      <InputNumber data-testid='controlled' value={value} onChange={setValue} />
+      {/* Read-only  */}
+      <InputNumber data-testid='readonly' value={42} readOnly />
+
+      <InputNumber autoFocus data-testid='focus' placeholder='Auto Focus' />
 
       {/* Min/Max range */}
       <InputNumber data-testid='range' min={1} max={10} defaultValue={5} />
@@ -35,9 +34,6 @@ const InputNumberShowcasePage = () => {
         }
       />
 
-      {/* Read-only style (not native readonly attr) */}
-      <InputNumber data-testid='readonly' value={42} readOnly />
-
       {/* Size variations */}
       <InputNumber data-testid='small' size='small' defaultValue={3} />
       <InputNumber data-testid='middle' size='middle' defaultValue={5} />
@@ -47,6 +43,34 @@ const InputNumberShowcasePage = () => {
         data-testid='addon-input'
         addonBefore='kg'
         addonAfter='grams'
+      />
+
+      <InputNumber
+        prefix='$'
+        suffix='USD'
+        data-testid='prefix-suffix'
+        placeholder='Enter price'
+      />
+
+      <InputNumber status='error' data-testid='error' />
+      <InputNumber status='warning' data-testid='warning' />
+
+      <InputNumber
+        data-testid='outlined'
+        variant='outlined'
+        placeholder='Enter amount'
+      />
+
+      <InputNumber
+        data-testid='filled'
+        variant='filled'
+        placeholder='Enter amount'
+      />
+
+      <InputNumber
+        data-testid='borderless'
+        variant='borderless'
+        placeholder='Enter amount'
       />
     </Space>
   );

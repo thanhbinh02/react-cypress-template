@@ -1,28 +1,68 @@
-// @ts-check
 /// <reference types="cypress" />
 
-describe('Ant Design Spin', () => {
+const selectorSpin = {
+  toggleSpinLoading: '[data-testid="toggle-spin-loading"]',
+  toggleSpinBtn: '[data-testid="toggle-spin-btn"]',
+  spinTip: '[data-testid="spin-tip"]',
+  smallSpin: '[data-testid="small-spin"]',
+  largeSpin: '[data-testid="large-spin"]',
+  customIndicatorSpin: '[data-testid="custom-indicator-spin"]',
+};
+
+describe('Spin Showcase', () => {
   beforeEach(() => {
-    cy.visit('/');
+    cy.visit('http://localhost:5173/spin');
   });
 
-  const inputSelectors = {
-    spin: '[data-testid="login-loading-spinner"]',
-    simulateLoadingBtn: '[data-testid="simulate-loading-btn"]',
-  };
+  describe('Basic Spin', () => {
+    it('should toggle Spin visibility on button click', () => {
+      cy.get(selectorSpin.toggleSpinLoading)
+        .should('exist')
+        .should('not.have.class', 'ant-spin-spinning');
 
-  it('Displays Spin when clicking simulate loading button', () => {
-    cy.get(inputSelectors.simulateLoadingBtn).click();
-    cy.get(inputSelectors.spin).should('be.visible');
+      cy.get(selectorSpin.toggleSpinBtn).click();
+
+      cy.get(selectorSpin.toggleSpinLoading)
+        .should('exist')
+        .should('have.class', 'ant-spin-spinning');
+
+      cy.get(selectorSpin.toggleSpinBtn).click();
+
+      cy.get(selectorSpin.toggleSpinLoading)
+        .should('exist')
+        .should('not.have.class', 'ant-spin-spinning');
+    });
+
+    it('should render tip text when spinning', () => {
+      cy.get(selectorSpin.spinTip)
+        .first()
+        .within(() => {
+          cy.contains('Tip Loading ...').should('be.visible');
+        });
+    });
   });
 
-  it('Hides Spin after loading is completed', () => {
-    cy.get(inputSelectors.simulateLoadingBtn).click();
+  describe('Custom Spin Size', () => {
+    it('should display small Spin', () => {
+      cy.get(selectorSpin.smallSpin)
+        .should('exist')
+        .should('have.class', 'ant-spin-sm');
+    });
 
-    cy.get(inputSelectors.spin).should('be.visible').and('have.attr', 'aria-busy', 'true');
+    it('should display large Spin', () => {
+      cy.get(selectorSpin.largeSpin)
+        .should('exist')
+        .should('have.class', 'ant-spin-lg');
+    });
+  });
 
-    cy.wait(2000);
-
-    cy.get(inputSelectors.spin).should('not.have.attr', 'aria-busy', 'true');
+  describe('Custom Indicator Spin', () => {
+    it('should display custom indicator Spin', () => {
+      cy.get(selectorSpin.customIndicatorSpin).each(($el) => {
+        cy.wrap($el).within(() => {
+          cy.get('.anticon-loading.ant-spin-dot').should('exist');
+        });
+      });
+    });
   });
 });
