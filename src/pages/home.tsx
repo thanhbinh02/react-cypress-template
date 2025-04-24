@@ -13,6 +13,11 @@ const items = [
   { path: '/tooltip', text: 'Go to Tooltip Showcase' },
   { path: '/tag', text: 'Go to Tag Showcase' },
   { path: '/input-number', text: 'Go to Input Number Showcase' },
+  { path: '/pop-confirm', text: 'Go to Pop Confirm Showcase' },
+  { path: '/spin', text: 'Go to Spin Showcase' },
+  { path: '/checkbox', text: 'Go to Checkbox Showcase' },
+  { path: '/date-picker', text: 'Go to Date Picker Showcase' },
+  { path: '/table', text: 'Go to Table Showcase' },
 ];
 
 const HomePage = () => {
@@ -27,16 +32,6 @@ const HomePage = () => {
           </Button>
         </Link>
       ))}
-      <Button onClick={() => navigate('/pop-confirm')}>
-        Go to Pop Confirm Showcase
-      </Button>
-      <Button onClick={() => navigate('/spin')}>Go to Spin Showcase</Button>
-      <Button onClick={() => navigate('/checkbox')}>
-        Go to Checkbox Showcase
-      </Button>
-      <Button onClick={() => navigate('/date-picker')}>
-        Go to Date Picker Showcase
-      </Button>
     </div>
   );
 };

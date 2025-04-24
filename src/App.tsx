@@ -18,6 +18,7 @@ import PopConfirmShowcasePage from './pages/pop-confirm-showcase-page';
 import SpinShowcasePage from './pages/spin-showcase-page';
 import CheckboxShowcasePage from './pages/checkbox-showcase-page';
 import DatePickerShowcasePage from './pages/date-picker-showcase-page';
+import TableShowcasePage from './pages/table-showcase-page';
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
         <Route path='/spin' element={<SpinShowcasePage />} />
         <Route path='/checkbox' element={<CheckboxShowcasePage />} />
         <Route path='/date-picker' element={<DatePickerShowcasePage />} />
+        <Route path='/table' element={<TableShowcasePage />} />
       </Routes>
     </Router>
   );
