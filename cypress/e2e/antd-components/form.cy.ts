@@ -1,6 +1,25 @@
-/// <reference types="cypress" />
+import { generateFormItemSelector } from "../../support/formTestUtils";
+import { checkInputProps } from "../../support/inputTestUtils";
+import { checkSelectProps } from "../../support/selectTestUtils";
 
-let formData;
+interface Field {
+  name: string;
+  required: boolean;
+  initialValue: string | number;
+  type: "input" | "select" | "radio";
+  props?: Record<string, unknown>;
+}
+
+interface FormData {
+  path: string;
+  nameForm: string;
+  fields: Record<string, Field>;
+  genders: Record<string, string>;
+  submitData: { note: string; age: string; gender: number };
+  buttons: Array<{ text: string }>;
+}
+
+let formData: FormData;
 
 before(() => {
   cy.fixture("form-data.json").then((data) => {
@@ -28,15 +47,12 @@ describe("AntD Form", () => {
       .click();
 
     cy.get(`input[type="radio"][value="${data.age}"]`).check({ force: true });
-
     cy.get("button[type='submit']").click();
   };
 
   it("should render the form with all fields and buttons", () => {
-    formData.fields.forEach((field) => {
-      const selector = `#${formData.nameForm ? `${formData.nameForm}_` : ""}${
-        field.name
-      }`;
+    Object.values(formData.fields).forEach((field: Field) => {
+      const selector = generateFormItemSelector(formData.nameForm, field.name);
 
       cy.get(selector).should("exist");
 
@@ -53,25 +69,37 @@ describe("AntD Form", () => {
     });
   });
 
+  it("should validate note input props", () => {
+    const { name, props } = formData.fields.note;
+    const selector = generateFormItemSelector(formData.nameForm, name);
+    cy.get(selector).should("be.visible");
+    checkInputProps(selector, props);
+  });
+
+  it("should validate gender select gender", () => {
+    const { name, props } = formData.fields.gender;
+    const selector = generateFormItemSelector(formData.nameForm, name);
+
+    checkSelectProps(selector, props);
+  });
+
   it("should auto-fill the form with provided data when Fill form button is clicked", () => {
     cy.get("button").contains("Fill form").click();
 
-    formData.fields.forEach((field) => {
-      const id = `#${formData.nameForm ? `${formData.nameForm}_` : ""}${
-        field.name
-      }`;
+    Object.values(formData.fields).forEach((field: Field) => {
+      const id = generateFormItemSelector(formData.nameForm, field.name);
       const expectedValue = field.initialValue;
 
-      if (field.name === "gender") {
+      if (field.type === "select") {
         cy.get(".ant-select-selection-item").should(
           "have.text",
-          formData.genders[expectedValue]
+          formData.genders[expectedValue as string]
         );
-      } else if (field.name === "age") {
+      } else if (field.type === "radio") {
         cy.get(`input[type="radio"][value="${expectedValue}"]`).should(
           "be.checked"
         );
-      } else {
+      } else if (field.type === "input") {
         cy.get(id).should("have.value", expectedValue);
       }
     });

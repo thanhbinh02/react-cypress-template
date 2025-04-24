@@ -1,21 +1,34 @@
 {
-  "fields": [
-    {
+  "fields": {
+    "note": {
       "name": "note",
       "required": true,
-      "initialValue": "Hello world!"
+      "initialValue": "Hello world!",
+      "type": "input",
+      "props": {
+        "placeholder": "Enter note",
+        "defaultValue": "This is note",
+        "sizeClass": "large"
+      }
     },
-    {
+    "gender": {
       "name": "gender",
       "required": true,
-      "initialValue": 1
+      "initialValue": 1,
+      "type": "select",
+      "props": {
+        "type": "single",
+        "placeholder": "Select gender",
+        "defaultValue": 1
+      }
     },
-    {
+    "age": {
       "name": "age",
       "required": false,
-      "initialValue": "a"
+      "initialValue": "a",
+      "type": "radio"
     }
-  ],
+  },
   "buttons": [
     { "text": "Submit" },
     { "text": "Reset" },

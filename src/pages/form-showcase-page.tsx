@@ -22,15 +22,21 @@ const FormShowcasePage: React.FC = () => {
 
   return (
     <Form form={form} onFinish={onFinish}>
-      <Form.Item name="note" label="Note" rules={[{ required: true }]}>
-        <Input placeholder="Enter note" />
+      <Form.Item
+        name="note"
+        label="Note"
+        rules={[{ required: true }]}
+        initialValue="This is note"
+      >
+        <Input placeholder="Enter note" size="large" />
       </Form.Item>
 
       <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
         <Select
-          placeholder="Select a option and change input text above"
+          placeholder="Select gender"
           allowClear
           options={GENDERS}
+          defaultValue={1}
         />
       </Form.Item>
 
