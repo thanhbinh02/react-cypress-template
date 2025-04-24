@@ -1,32 +1,32 @@
-import { Button } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import { Button } from "antd";
+import { Link } from "react-router-dom";
+
+const items = [
+  { path: "/message", text: "Go to Message Showcase" },
+  { path: "/button", text: "Go to Button Showcase" },
+  { path: "/input", text: "Go to Input Showcase" },
+  { path: "/radio", text: "Go to Radio Showcase" },
+  { path: "/select", text: "Go to Select Showcase" },
+  { path: "/switch", text: "Go to Switch Showcase" },
+  { path: "/card", text: "Go to Card Showcase" },
+  { path: "/form", text: "Go to Form Showcase", isPrimary: true },
+  { path: "/tooltip", text: "Go to Tooltip Showcase" },
+  { path: "/tag", text: "Go to Tag Showcase" },
+  { path: "/input-number", text: "Go to Input Number Showcase" },
+];
 
 const HomePage = () => {
-  const navigate = useNavigate();
-
   return (
-    <div className='app-container'>
-      <h1>Welcome</h1>
-      <Button onClick={() => navigate('/message')}>
-        Go to Message Showcase
-      </Button>
-      <Button onClick={() => navigate('/button')}>Go to Button Showcase</Button>
-      <Button onClick={() => navigate('/input')}>Go to Input Showcase</Button>
-      <Button onClick={() => navigate('/radio')}>Go to Radio Showcase</Button>
-      <Button onClick={() => navigate('/select')}>Go to Select Showcase</Button>
-      <Button onClick={() => navigate('/switch')}>Go to Switch Showcase</Button>
-      <Button onClick={() => navigate('/card')}>Go to Card Showcase</Button>
-      <Button onClick={() => navigate('/form')}>Go to Form Showcase</Button>
-      <Button onClick={() => navigate('/button')}>Go to Button Showcase</Button>
-      <Button onClick={() => navigate('/input')}>Go to Input Showcase</Button>
-      <Button onClick={() => navigate('/radio')}>Go to Radio Showcase</Button>
-      <Button onClick={() => navigate('/tooltip')}>
-        Go to Tooltip Showcase
-      </Button>
-      <Button onClick={() => navigate('/tag')}>Go to Tag Showcase</Button>
-      <Button onClick={() => navigate('/input-number')}>
-        Go to Input Number Showcase
-      </Button>
+    <div className="app-container flex flex-col gap-2">
+      <h1 className="font-bold">Welcome</h1>
+
+      {items.map(({ path, text, isPrimary }) => (
+        <Link to={path} key={path}>
+          <Button key={path + text} type={isPrimary ? "primary" : "default"}>
+            {text}
+          </Button>
+        </Link>
+      ))}
     </div>
   );
 };

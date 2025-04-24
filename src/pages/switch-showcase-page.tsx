@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { Switch, Typography } from "antd";
-
-const { Title } = Typography;
+import BackToHome from "@/components/back-to-home";
+import { Switch } from "antd";
+import { useState } from "react";
 
 const SwitchShowcasePage = () => {
   const [checked, setChecked] = useState(false);
 
   return (
-    <div style={{ padding: 24 }}>
-      <Title level={4}>Ant Design Switch Example</Title>
+    <div className="flex flex-col gap-2">
+      <BackToHome />
 
-      <div style={{ marginBottom: 16 }}>
+      <div>
         <Switch id="mainSwitch" checked={checked} onChange={setChecked} />
         <span id="switchStatus" style={{ marginLeft: 12 }}>
           {checked ? "ON" : "OFF"}

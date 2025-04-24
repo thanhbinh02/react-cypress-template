@@ -48,18 +48,6 @@
   margin: 0 auto;
 }
 
-.button-group {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px;
-  margin-top: 20px;
-}
-
-.button-group button {
-  width: 100%;
-  margin-bottom: 8px;
-}
-
 /* Message positioning */
 .ant-message {
   position: fixed;

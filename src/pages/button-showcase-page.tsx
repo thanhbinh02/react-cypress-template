@@ -5,14 +5,16 @@ import {
   PlusOutlined,
   LoadingOutlined,
 } from "@ant-design/icons";
+import BackToHome from "@/components/back-to-home";
 
 const ButtonShowcasePage = () => {
   return (
     <div className="button-showcase">
-      <h1>Button Showcase</h1>
+      <BackToHome />
 
       <Space direction="vertical" size="large">
         {/* Button Types */}
+
         <Space>
           <Button type="primary">Primary Button</Button>
           <Button>Default Button</Button>

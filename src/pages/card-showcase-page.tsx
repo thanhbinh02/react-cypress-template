@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { Card, Typography } from "antd";
+import BackToHome from "@/components/back-to-home";
 import {
-  SettingOutlined,
   EditOutlined,
   EllipsisOutlined,
+  SettingOutlined,
 } from "@ant-design/icons";
-
-const { Title } = Typography;
+import { Card } from "antd";
+import React, { useState } from "react";
 
 const CardShowcasePage: React.FC = () => {
   const [actionMessage, setActionMessage] = useState("");
@@ -16,8 +15,8 @@ const CardShowcasePage: React.FC = () => {
   };
 
   return (
-    <div style={{ padding: 24 }}>
-      <Title level={3}>Ant Design Card Showcase</Title>
+    <div className="flex flex-col gap-2">
+      <BackToHome />
 
       <Card title="Card Title" style={{ width: 300, marginBottom: 24 }}>
         This is the content of the card.

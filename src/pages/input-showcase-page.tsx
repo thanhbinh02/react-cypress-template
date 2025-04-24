@@ -1,3 +1,4 @@
+import BackToHome from "@/components/back-to-home";
 import {
   EyeInvisibleOutlined,
   EyeOutlined,
@@ -10,8 +11,16 @@ const InputShowcasePage = () => {
   return (
     <div
       data-testid="input-showcase"
-      style={{ padding: 20, display: "flex", flexDirection: "column", gap: 16 }}
+      className="flex flex-col-gap-4"
+      style={{
+        padding: 20,
+        display: "flex",
+        flexDirection: "column",
+        gap: 16,
+      }}
     >
+      <BackToHome />
+
       <Input id="basicInput" placeholder="Basic Input" />
       <Input id="disabledInput" placeholder="Disabled Input" disabled />
       <Input id="readOnlyInput" defaultValue="Read only" readOnly />

@@ -2,6 +2,7 @@
 import React from "react";
 import { Select } from "antd";
 import type { SelectProps } from "antd";
+import BackToHome from "@/components/back-to-home";
 
 const options: SelectProps["options"] = [
   { value: "1", label: "Option 1" },
@@ -11,8 +12,9 @@ const options: SelectProps["options"] = [
 
 const SelectShowcasePage: React.FC = () => {
   return (
-    <div style={{ width: 300 }}>
-      <h3>Single Select</h3>
+    <div>
+      <BackToHome />
+
       <Select
         id="single-select"
         placeholder="Chọn mục..."

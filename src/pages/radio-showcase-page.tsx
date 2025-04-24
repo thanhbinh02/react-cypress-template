@@ -1,4 +1,5 @@
 // RadioShowcasePage.tsx
+import BackToHome from "@/components/back-to-home";
 import { Radio } from "antd";
 import { useState } from "react";
 
@@ -6,8 +7,9 @@ const RadioShowcasePage = () => {
   const [value, setValue] = useState("option1");
 
   return (
-    <div>
-      <h2>Radio Showcase</h2>
+    <div className="flex flex-col gap-2">
+      <BackToHome />
+
       <Radio.Group
         id="exampleRadioGroup"
         data-testid="radio-group"

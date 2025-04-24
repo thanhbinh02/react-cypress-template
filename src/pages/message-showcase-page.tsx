@@ -1,4 +1,5 @@
-import { Button, ConfigProvider, message } from "antd";
+import BackToHome from "@/components/back-to-home";
+import { Button, message } from "antd";
 
 function MessageShowcasePage() {
   const [messageApi, contextHolder] = message.useMessage();
@@ -93,96 +94,92 @@ function MessageShowcasePage() {
   };
 
   return (
-    <ConfigProvider>
-      <div className="app-container">
-        {contextHolder}
-        <div className="button-group">
-          <Button
-            type="primary"
-            className="ant-btn-success"
-            onClick={showSuccessMessage}
-          >
-            Success Message
-          </Button>
+    <div className="app-container">
+      <BackToHome />
 
-          <Button danger className="ant-btn-error" onClick={showErrorMessage}>
-            Error Message
-          </Button>
+      {contextHolder}
+      <div className="flex flex-col gap-2">
+        <Button
+          type="primary"
+          className="ant-btn-success"
+          onClick={showSuccessMessage}
+        >
+          Success Message
+        </Button>
 
-          <Button
-            type="primary"
-            className="ant-btn-warning"
-            onClick={showWarningMessage}
-          >
-            Warning Message
-          </Button>
+        <Button danger className="ant-btn-error" onClick={showErrorMessage}>
+          Error Message
+        </Button>
 
-          <Button
-            type="primary"
-            className="ant-btn-loading"
-            onClick={showLoadingMessage}
-          >
-            Loading Message
-          </Button>
+        <Button
+          type="primary"
+          className="ant-btn-warning"
+          onClick={showWarningMessage}
+        >
+          Warning Message
+        </Button>
 
-          <Button
-            type="primary"
-            className="ant-btn-info"
-            onClick={showInfoMessage}
-          >
-            Info Message
-          </Button>
+        <Button
+          type="primary"
+          className="ant-btn-loading"
+          onClick={showLoadingMessage}
+        >
+          Loading Message
+        </Button>
 
-          <Button
-            type="primary"
-            className="ant-btn-custom-duration"
-            onClick={showCustomDurationMessage}
-          >
-            Custom Duration
-          </Button>
+        <Button
+          type="primary"
+          className="ant-btn-info"
+          onClick={showInfoMessage}
+        >
+          Info Message
+        </Button>
 
-          <Button
-            type="primary"
-            className="ant-btn-custom-content"
-            onClick={showCustomContentMessage}
-          >
-            Custom Content
-          </Button>
+        <Button
+          type="primary"
+          className="ant-btn-custom-duration"
+          onClick={showCustomDurationMessage}
+        >
+          Custom Duration
+        </Button>
 
-          <Button
-            type="primary"
-            className="ant-btn-top"
-            onClick={showTopMessage}
-          >
-            Top Message
-          </Button>
+        <Button
+          type="primary"
+          className="ant-btn-custom-content"
+          onClick={showCustomContentMessage}
+        >
+          Custom Content
+        </Button>
 
-          <Button
-            type="primary"
-            className="ant-btn-bottom"
-            onClick={showBottomMessage}
-          >
-            Bottom Message
-          </Button>
+        <Button type="primary" className="ant-btn-top" onClick={showTopMessage}>
+          Top Message
+        </Button>
 
-          <Button
-            type="primary"
-            className="ant-btn-with-icon"
-            onClick={showMessageWithIcon}
-          >
-            Message with Icon
-          </Button>
+        <Button
+          type="primary"
+          className="ant-btn-bottom"
+          onClick={showBottomMessage}
+        >
+          Bottom Message
+        </Button>
 
-          <Button
-            type="primary"
-            className="ant-btn-html"
-            onClick={showHTMLMessage}
-          >
-            HTML Message
-          </Button>
-        </div>
+        <Button
+          type="primary"
+          className="ant-btn-with-icon"
+          onClick={showMessageWithIcon}
+        >
+          Message with Icon
+        </Button>
+
+        <Button
+          type="primary"
+          className="ant-btn-html"
+          onClick={showHTMLMessage}
+        >
+          HTML Message
+        </Button>
       </div>
-    </ConfigProvider>
+    </div>
   );
 }
 
