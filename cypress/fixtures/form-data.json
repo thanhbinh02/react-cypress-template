@@ -18,8 +18,7 @@
       "type": "select",
       "props": {
         "type": "single",
-        "placeholder": "Select gender",
-        "defaultValue": 1
+        "placeholder": "Select gender"
       }
     },
     "age": {

@@ -36,12 +36,7 @@ const FormShowcasePage: React.FC = () => {
         </Form.Item>
 
         <Form.Item name="gender" label="Gender" rules={[{ required: true }]}>
-          <Select
-            placeholder="Select gender"
-            allowClear
-            options={GENDERS}
-            defaultValue={1}
-          />
+          <Select placeholder="Select gender" allowClear options={GENDERS} />
         </Form.Item>
 
         <Form.Item name="age" label="age">
