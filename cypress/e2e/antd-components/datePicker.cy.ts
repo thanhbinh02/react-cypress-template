@@ -10,14 +10,17 @@ describe('DatePicker Showcase', () => {
     cy.get('body').click(0, 0); // Click ra ngoài để đóng DatePicker
   });
 
-  it('Selects a date in DatePicker', () => {
+  it("Selects today's date in DatePicker", () => {
+    const today = dayjs().format('YYYY-MM-DD');
+    const day = dayjs().date(); // chỉ lấy số ngày (ví dụ: 25)
+
     cy.get('[data-testid="datepicker"]').click();
     cy.get('.ant-picker-cell-inner')
       .not('.ant-picker-cell-disabled')
-      .contains(/^25$/)
+      .contains(new RegExp(`^${day}$`))
       .click();
 
-    cy.get('[data-testid="datepicker"]').should('have.value', '2025-04-25');
+    cy.get('[data-testid="datepicker"]').should('have.value', today);
   });
 
   it('Selects a specific month and year', () => {
