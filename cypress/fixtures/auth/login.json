@@ -1,19 +1,24 @@
 {
-  "path": "https://atk-shipping-admin-panel-dev.estuary.solutions/login",
+  "page": "https://deheus-aqua-client-panel-dev.estuary.solutions",
+  "loginPath": "/login",
+  "countryList": ["Bangladesh", "Việt Nam"],
+  "languageList": {
+    "Việt Nam": ["English", "Vietnamese"],
+    "Bangladesh": ["English"]
+  },
   "validUser": {
-    "email": "admin@gmail.com",
-    "password": "123456a@"
+    "username": "dev1",
+    "password": "123456a@",
+    "message": "login.login_success"
   },
   "invalidPassword": {
-    "email": "admin@gmail.com",
-    "password": "123456aA@"
+    "username": "dev2",
+    "password": "123456aA@",
+    "message": "login.login_error"
   },
   "lockedAccount": {
-    "email": "test1@gmail.com",
-    "password": "123456a@"
-  },
-  "messages": {
-    "incorrectPassword": "Đã xảy ra lỗi: - Mật khẩu không chính xác",
-    "accountLocked": "Đã xảy ra lỗi: - Tài khoản đã bị khoá"
+    "username": "minhtri.tran2",
+    "password": "123456a@",
+    "message": "login.login_error"
   }
 }

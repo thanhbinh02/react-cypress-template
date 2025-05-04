@@ -1,38 +1,102 @@
+import { fetchLanguageData } from "cypress/support/languageUtils";
+import "../../../support/commands";
 /// <reference types="cypress" />
 
-describe("visit login page of ATK", () => {
-  let loginData;
+describe("Login Flow", () => {
+  let loginData: {
+    page: string;
+    loginPath: string;
+    validUser: { username: string; password: string; message: string };
+    invalidPassword: { username: string; password: string; message: string };
+    lockedAccount: { username: string; password: string; message: string };
+  };
 
-  beforeEach(() => {
+  before(() => {
     cy.fixture("auth/login.json").then((data) => {
       loginData = data;
     });
   });
 
-  const login = (email: string, password: string) => {
-    cy.visit(loginData.path);
-    cy.get("#email").type(email);
-    cy.get("#password").type(password);
-    cy.get("button").click();
+  const login = (username: string, password: string, message: string) => {
+    const languageData = Cypress.env("languageData");
+
+    cy.get("#username").clear().type(username);
+    cy.get("#password").clear().type(password);
+    cy.get("button[type='submit']").click();
+
+    cy.contains(languageData?.[message]).should("be.visible");
   };
 
-  const assertErrorMessage = (message) => {
-    cy.get(".ant-message-notice-wrapper", { timeout: 10000 }).within(() => {
-      cy.contains("span", message).should("be.visible");
+  const logout = () => {
+    cy.getAllLocalStorage().then((localStorageData) => {
+      cy.log("LocalStorage Data:", localStorageData);
+      const languageData = Cypress.env("languageData");
+      cy.log("languageData Data:", languageData);
+      const yesText = languageData?.["common.yes"];
+      const logoutText = languageData?.["common.logout"];
+
+      const clientInfo = localStorageData[loginData.page]["aqua_client_info"];
+      if (clientInfo) {
+        const parsedClientInfo: AquaClientInfo = JSON.parse(
+          clientInfo as string
+        );
+        cy.log("Parsed Client Info:", parsedClientInfo);
+
+        if (parsedClientInfo.memberName) {
+          const memberName = parsedClientInfo.memberName;
+          cy.log("Member Name:", memberName);
+
+          cy.get("p.text-sm").contains(memberName).click();
+
+          cy.get(".ant-dropdown-menu").contains(logoutText).click();
+
+          cy.get("button.ant-btn").contains(yesText).click();
+
+          cy.url().should("include", loginData.loginPath);
+        } else {
+          cy.log("No memberName in parsed client info");
+        }
+      } else {
+        cy.log("No client info in localStorage");
+      }
     });
   };
 
-  it("should log in successfully", () => {
-    login(loginData.validUser.email, loginData.validUser.password);
+  beforeEach(() => {
+    cy.visit(`${loginData.page}${loginData.loginPath}`);
+    selectCountryAndLanguage();
+    cy.get("#username").should("be.visible");
   });
 
-  it("should show error message with incorrect password", () => {
-    login(loginData.invalidPassword.email, loginData.invalidPassword.password);
-    assertErrorMessage(loginData.messages.incorrectPassword);
+  it("Login with correct credentials", () => {
+    login(
+      loginData.validUser.username,
+      loginData.validUser.password,
+      loginData.validUser.message
+    );
+
+    logout();
   });
 
-  it("should show error message with account locked", () => {
-    login(loginData.lockedAccount.email, loginData.lockedAccount.password);
-    assertErrorMessage(loginData.messages.accountLocked);
+  it("Login with incorrect password", () => {
+    login(
+      loginData.invalidPassword.username,
+      loginData.invalidPassword.password,
+      loginData.invalidPassword.message
+    );
+  });
+
+  it("Login with locked account", () => {
+    login(
+      loginData.lockedAccount.username,
+      loginData.lockedAccount.password,
+      loginData.lockedAccount.message
+    );
   });
 });
+
+interface AquaClientInfo {
+  expiresIn: string;
+  memberName: string;
+  isShowPrice: boolean;
+}
