@@ -62,6 +62,30 @@ describe("Login Flow", () => {
     });
   };
 
+  const selectCountryAndLanguage = () => {
+    cy.clearLocalStorage();
+
+    cy.get("#country").click();
+    cy.get(".ant-select-dropdown .ant-select-item")
+      .first()
+      .click({ force: true });
+    cy.get("body").click(0, 0);
+    cy.wait(300);
+
+    cy.get("#language").click();
+    cy.get(
+      ".ant-select-dropdown .rc-virtual-list-holder-inner .ant-select-item"
+    )
+      .contains("English")
+      .click({ force: true });
+
+    cy.get("button[type='submit']").click();
+
+    cy.wait(200);
+
+    fetchLanguageData();
+  };
+
   beforeEach(() => {
     cy.visit(`${loginData.page}${loginData.loginPath}`);
     selectCountryAndLanguage();
