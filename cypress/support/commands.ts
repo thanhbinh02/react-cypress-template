@@ -36,35 +36,52 @@
 //   }
 // }
 
+// Import commands.js using ES2015 syntax:
+import './commands';
+import './authCommands';
+import 'cypress-file-upload';
+
+// Alternatively you can use CommonJS syntax:
+// require('./commands')
+
 Cypress.Commands.add(
-  "typeAndBlur",
-  { prevSubject: "element" },
+  'typeAndBlur',
+  { prevSubject: 'element' },
   (subject, value: string) => {
     cy.wrap(subject).clear().type(value).blur();
   }
 );
 
 Cypress.Commands.add(
-  "shouldHaveValue",
-  { prevSubject: "element" },
+  'shouldHaveValue',
+  { prevSubject: 'element' },
   (
     subject,
     expectedValue: string | number,
-    matcher: keyof Chai.Assertion | undefined = "value"
+    matcher: keyof Chai.Assertion | undefined = 'value'
   ) => {
     cy.wrap(subject).should(`have.${matcher}`, expectedValue);
   }
 );
 
+Cypress.Commands.add('submitForm', () => {
+  cy.get('body').click(0, 0);
+  cy.contains('button', 'Save').click();
+
+  cy.get('.ant-popconfirm').within(() => {
+    cy.contains('button', 'Agree').click();
+  });
+});
+
 let LOCAL_STORAGE_MEMORY = {};
 
-Cypress.Commands.add("saveLocalStorage", () => {
+Cypress.Commands.add('saveLocalStorage', () => {
   Object.keys(localStorage).forEach((key) => {
     LOCAL_STORAGE_MEMORY[key] = localStorage[key];
   });
 });
 
-Cypress.Commands.add("restoreLocalStorage", () => {
+Cypress.Commands.add('restoreLocalStorage', () => {
   Object.keys(LOCAL_STORAGE_MEMORY).forEach((key) => {
     localStorage.setItem(key, LOCAL_STORAGE_MEMORY[key]);
   });

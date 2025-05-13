@@ -9,9 +9,9 @@ declare global {
         expectedValue: string | number,
         matcher?: keyof Chai.Assertion
       ): Chainable<JQuery<HTMLElement>>;
+      submitForm(): Chainable<void>;
     }
   }
 }
 
-// 👇 Phải export 1 dòng gì đó để không bị lỗi isolatedModules
 export {};
