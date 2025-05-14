@@ -10,6 +10,16 @@ declare global {
         matcher?: keyof Chai.Assertion
       ): Chainable<JQuery<HTMLElement>>;
       submitForm(): Chainable<void>;
+      cancelForm(): Chainable<void>;
+      selectOption(selectId: string, optionIndex: number): Chainable<void>;
+      selectDate(
+        selector: string,
+        options: {
+          day?: string;
+          month?: string;
+          year?: string;
+        }
+      ): Chainable<void>;
     }
   }
 }

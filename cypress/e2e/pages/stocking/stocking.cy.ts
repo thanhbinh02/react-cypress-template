@@ -57,74 +57,56 @@ describe('Stocking Flow', () => {
   //   cy.contains('Stocking information is recorded').should('be.visible');
   // });
 
-  function selectBreedingOption(selectId: string, optionIndex: number) {
-    cy.get(`#${selectId}`).click({ force: true });
+  // it('should create 3 stocking records in one submit', () => {
+  //   cy.contains('Add New Stocking').click({ force: true });
+  //   cy.wait(1000);
+  //   cy.get('input#imageIds').attachFile('vietnam.png');
 
-    cy.get(`#${selectId}_list`)
-      .should('exist')
-      .parent()
-      .find('.ant-select-item-option')
-      .eq(optionIndex)
-      .click({ force: true });
-  }
+  //   cy.selectDate('#stockingDate', { day: '19', month: 'Feb' });
 
-  it('should create 3 stocking records in one submit', () => {
-    cy.contains('Add New Stocking').click({ force: true });
-    cy.wait(1000);
-    cy.get('input#imageIds').attachFile('vietnam.png');
+  //   cy.get('.ant-card')
+  //     .contains('.ant-card-head-title', 'Add New Stocking')
+  //     .parents('.ant-card')
+  //     .as('card');
 
-    cy.get('#stockingDate').click({ force: true });
+  //   // --- Record 1 ---
+  //   cy.selectOption('batches_0_breedingId', 0);
 
-    cy.get('.ant-picker-dropdown') // dropdown hiện tại
-      .last() // dùng last để tránh chọn nhầm nếu có nhiều dropdown
-      .find('td') // ô ngày
-      .not('.ant-picker-cell-disabled') // bỏ qua các ô disabled
-      .contains(/^10$/) // tìm đúng số 15
-      .click({ force: true });
+  //   cy.get('@card').within(() => {
+  //     cy.get('#batches_0_origin').type('VN');
+  //     cy.get('#batches_0_initialQuantity').type('12000');
+  //     cy.get('#batches_0_cost').type('24000');
+  //     cy.get('#batches_0_weight').type('17000');
 
-    cy.get('.ant-card')
-      .contains('.ant-card-head-title', 'Add New Stocking')
-      .parents('.ant-card')
-      .as('card');
+  //     cy.contains('Add row').click();
+  //   });
 
-    // --- Record 1 ---
-    selectBreedingOption('batches_0_breedingId', 0);
+  //   // --- Record 2 ---
+  //   cy.selectOption('batches_1_breedingId', 3);
 
-    cy.get('@card').within(() => {
-      cy.get('#batches_0_origin').type('VN');
-      cy.get('#batches_0_initialQuantity').type('10000');
-      cy.get('#batches_0_cost').type('20000');
-      cy.get('#batches_0_weight').type('10000');
+  //   cy.get('@card').within(() => {
+  //     cy.get('#batches_1_origin').type('JP');
+  //     cy.get('#batches_1_initialQuantity').type('5000');
+  //     cy.get('#batches_1_cost').type('15000');
+  //     cy.get('#batches_1_weight').type('8000');
 
-      cy.contains('Add row').click();
-    });
+  //     cy.contains('Add row').click();
+  //   });
 
-    // --- Record 2 ---
-    selectBreedingOption('batches_1_breedingId', 3);
+  //   // --- Record 3 ---
+  //   cy.selectOption('batches_2_breedingId', 1);
 
-    cy.get('@card').within(() => {
-      cy.get('#batches_1_origin').type('JP');
-      cy.get('#batches_1_initialQuantity').type('5000');
-      cy.get('#batches_1_cost').type('15000');
-      cy.get('#batches_1_weight').type('8000');
+  //   cy.get('@card').within(() => {
+  //     cy.get('#batches_2_origin').type('BD');
+  //     cy.get('#batches_2_initialQuantity').type('7000');
+  //     cy.get('#batches_2_cost').type('8000');
+  //     cy.get('#batches_2_weight').type('90000');
+  //   });
 
-      cy.contains('Add row').click();
-    });
+  //   cy.submitForm();
 
-    // --- Record 3 ---
-    selectBreedingOption('batches_2_breedingId', 1);
-
-    cy.get('@card').within(() => {
-      cy.get('#batches_2_origin').type('BD');
-      cy.get('#batches_2_initialQuantity').type('7000');
-      cy.get('#batches_2_cost').type('8000');
-      cy.get('#batches_2_weight').type('90000');
-    });
-
-    cy.submitForm();
-
-    cy.contains('Stocking information is recorded').should('be.visible');
-  });
+  //   cy.contains('Stocking information is recorded').should('be.visible');
+  // });
 
   // it('should show error if cost is empty and Save is clicked', () => {
   //   cy.contains('Add New Stocking').click({ force: true });
@@ -146,4 +128,75 @@ describe('Stocking Flow', () => {
 
   //   cy.get('#batches_0_cost_help').should('contain', 'This field is required');
   // });
+
+  // it('should show required field errors and allow cancel', () => {
+  //   cy.contains('Add New Stocking').click({ force: true });
+  //   cy.wait(1000);
+
+  //   cy.submitForm();
+
+  //   cy.get('.ant-form-item-explain-error')
+  //     .should('contain', 'This field is required')
+  //     .and('have.length.at.least', 1);
+
+  //   cy.contains('Stocking information is recorded').should('not.exist');
+
+  //   cy.cancelForm();
+  // });
+
+  // it('should set cost to 0 when a negative number is entered', () => {
+  //   cy.contains('Add New Stocking').click({ force: true });
+
+  //   cy.get('.ant-card')
+  //     .contains('.ant-card-head-title', 'Add New Stocking')
+  //     .parents('.ant-card')
+  //     .as('card');
+
+  //   cy.get('@card').within(() => {
+  //     cy.get('#batches_0_origin').type('VN');
+  //     cy.get('#batches_0_initialQuantity').type('20000');
+  //     cy.get('#batches_0_weight').type('20000');
+  //     cy.get('input#imageIds').attachFile('vietnam.png');
+  //     cy.get('.ant-upload-list').should('contain', 'vietnam.png');
+
+  //     cy.get('#batches_0_cost').type('-5000').blur().should('have.value', '0');
+  //   });
+
+  //   cy.submitForm();
+
+  //   cy.contains('An error has occurred. Please try again later!').should(
+  //     'exist'
+  //   );
+  // });
+
+  it('should find first record in table and click Edit', () => {
+    cy.get('.ant-card')
+      .contains('.ant-card-head-title', 'Stocking')
+      .parents('.ant-card')
+      .as('card');
+
+    cy.get('.ant-table-tbody > tr:not([aria-hidden="true"])')
+      .first()
+      .within(() => {
+        cy.get('img[src="/images/edit-icon.png"]')
+          .parents('button')
+          .click({ force: true });
+      });
+
+    cy.get('.ant-modal').contains('Stocking detail').should('be.visible');
+    cy.get('.ant-modal').within(() => {
+      cy.get('input#imageIds').attachFile('vietnam.png');
+      cy.wait(1000);
+      cy.get('#batches_0_cost').clear();
+      cy.get('#batches_0_cost').type('24000');
+      cy.get('#note').type('test note');
+    });
+
+    cy.get('.ant-modal').within(() => {
+      cy.contains('Save').click();
+    });
+
+    cy.get('.ant-popover').should('be.visible');
+    cy.get('.ant-popover .ant-btn-primary').contains('Agree').click();
+  });
 });

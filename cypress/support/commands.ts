@@ -73,6 +73,68 @@ Cypress.Commands.add('submitForm', () => {
   });
 });
 
+Cypress.Commands.add('cancelForm', () => {
+  cy.get('body').click(0, 0);
+  cy.contains('button', 'Cancel').click();
+
+  cy.get('.ant-popconfirm')
+    .not('.ant-popover-hidden')
+    .should('have.length', 1)
+    .within(() => {
+      cy.contains('button', 'Agree').click();
+    });
+});
+
+Cypress.Commands.add(
+  'selectOption',
+  (selectId: string, optionIndex: number) => {
+    cy.get(`#${selectId}`).click({ force: true });
+
+    cy.get(`#${selectId}_list`)
+      .should('exist')
+      .parent()
+      .find('.ant-select-item-option')
+      .eq(optionIndex)
+      .click({ force: true });
+  }
+);
+
+Cypress.Commands.add(
+  'selectDate',
+  (
+    selector: string,
+    options: { day?: string; month?: string; year?: string }
+  ) => {
+    const { day, month, year } = options;
+
+    cy.get(selector).click({ force: true });
+
+    cy.get('.ant-picker-dropdown')
+      .should('be.visible')
+      .within(() => {
+        if (year) {
+          cy.get('.ant-picker-year-btn').click({ force: true });
+          cy.contains('.ant-picker-cell', year).click({ force: true });
+        }
+
+        if (month) {
+          if (!year) {
+            cy.get('.ant-picker-month-btn').click({ force: true });
+          }
+          cy.contains('.ant-picker-cell', month).click({ force: true });
+        }
+
+        if (day) {
+          cy.get('td')
+            .not('.ant-picker-cell-disabled')
+            .find('div')
+            .contains(new RegExp(`^${day}$`))
+            .click({ force: true });
+        }
+      });
+  }
+);
+
 let LOCAL_STORAGE_MEMORY = {};
 
 Cypress.Commands.add('saveLocalStorage', () => {
