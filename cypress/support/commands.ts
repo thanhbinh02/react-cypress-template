@@ -64,14 +64,20 @@ Cypress.Commands.add(
   }
 );
 
-Cypress.Commands.add('submitForm', () => {
-  cy.get('body').click(0, 0);
-  cy.contains('button', 'Save').click();
+Cypress.Commands.add(
+  'submitForm',
+  (submitText?: string, confirmText?: string) => {
+    const submitLabel = submitText ?? 'Save';
+    const confirmLabel = confirmText ?? 'Agree';
 
-  cy.get('.ant-popconfirm').within(() => {
-    cy.contains('button', 'Agree').click();
-  });
-});
+    // cy.get('body').click(0, 0);
+    cy.contains('button', submitLabel).click({ force: true });
+
+    cy.get('.ant-popconfirm').within(() => {
+      cy.contains('button', confirmLabel).click();
+    });
+  }
+);
 
 Cypress.Commands.add('cancelForm', () => {
   cy.get('body').click(0, 0);

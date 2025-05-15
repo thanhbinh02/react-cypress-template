@@ -9,7 +9,7 @@ declare global {
         expectedValue: string | number,
         matcher?: keyof Chai.Assertion
       ): Chainable<JQuery<HTMLElement>>;
-      submitForm(): Chainable<void>;
+      submitForm(submitText?: string, confirmText?: string): Chainable<void>;
       cancelForm(): Chainable<void>;
       selectOption(selectId: string, optionIndex: number): Chainable<void>;
       selectDate(
