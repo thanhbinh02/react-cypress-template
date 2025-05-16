@@ -27,6 +27,10 @@ describe('Stocking Flow', () => {
     });
   });
 
+  afterEach(() => {
+    cy.wait(2000);
+  });
+
   it('should open Add New Stocking card and get its body', () => {
     cy.contains('Add New Stocking').click({ force: true });
     cy.wait(1000);
@@ -47,10 +51,10 @@ describe('Stocking Flow', () => {
       .click({ force: true });
 
     cy.get('@card').within(() => {
-      cy.get('#batches_0_origin').type('VN');
-      cy.get('#batches_0_initialQuantity').type('10000');
-      cy.get('#batches_0_cost').type('20000');
-      cy.get('#batches_0_weight').type('10000');
+      cy.get('#batches_0_origin').slowType('VN');
+      cy.get('#batches_0_initialQuantity').slowType('10000');
+      cy.get('#batches_0_cost').slowType('20000');
+      cy.get('#batches_0_weight').slowType('10000');
     });
     cy.submitForm();
 
@@ -73,10 +77,10 @@ describe('Stocking Flow', () => {
     cy.selectOption('batches_0_breedingId', 0);
 
     cy.get('@card').within(() => {
-      cy.get('#batches_0_origin').type('VN');
-      cy.get('#batches_0_initialQuantity').type('12000');
-      cy.get('#batches_0_cost').type('24000');
-      cy.get('#batches_0_weight').type('17000');
+      cy.get('#batches_0_origin').slowType('VN');
+      cy.get('#batches_0_initialQuantity').slowType('12000');
+      cy.get('#batches_0_cost').slowType('24000');
+      cy.get('#batches_0_weight').slowType('17000');
 
       cy.contains('Add row').click();
     });
@@ -85,10 +89,10 @@ describe('Stocking Flow', () => {
     cy.selectOption('batches_1_breedingId', 3);
 
     cy.get('@card').within(() => {
-      cy.get('#batches_1_origin').type('JP');
-      cy.get('#batches_1_initialQuantity').type('5000');
-      cy.get('#batches_1_cost').type('15000');
-      cy.get('#batches_1_weight').type('8000');
+      cy.get('#batches_1_origin').slowType('JP');
+      cy.get('#batches_1_initialQuantity').slowType('5000');
+      cy.get('#batches_1_cost').slowType('15000');
+      cy.get('#batches_1_weight').slowType('8000');
 
       cy.contains('Add row').click();
     });
@@ -97,10 +101,10 @@ describe('Stocking Flow', () => {
     cy.selectOption('batches_2_breedingId', 1);
 
     cy.get('@card').within(() => {
-      cy.get('#batches_2_origin').type('BD');
-      cy.get('#batches_2_initialQuantity').type('7000');
-      cy.get('#batches_2_cost').type('8000');
-      cy.get('#batches_2_weight').type('90000');
+      cy.get('#batches_2_origin').slowType('BD');
+      cy.get('#batches_2_initialQuantity').slowType('7000');
+      cy.get('#batches_2_cost').slowType('8000');
+      cy.get('#batches_2_weight').slowType('90000');
     });
 
     cy.submitForm();
@@ -117,9 +121,9 @@ describe('Stocking Flow', () => {
       .as('card');
 
     cy.get('@card').within(() => {
-      cy.get('#batches_0_origin').type('VN');
-      cy.get('#batches_0_initialQuantity').type('20000');
-      cy.get('#batches_0_weight').type('20000');
+      cy.get('#batches_0_origin').slowType('VN');
+      cy.get('#batches_0_initialQuantity').slowType('20000');
+      cy.get('#batches_0_weight').slowType('20000');
       cy.get('input#imageIds').attachFile('vietnam.png');
       cy.get('.ant-upload-list').should('contain', 'vietnam.png');
     });
@@ -153,9 +157,9 @@ describe('Stocking Flow', () => {
       .as('card');
 
     cy.get('@card').within(() => {
-      cy.get('#batches_0_origin').type('VN');
-      cy.get('#batches_0_initialQuantity').type('20000');
-      cy.get('#batches_0_cost').type('20000');
+      cy.get('#batches_0_origin').slowType('VN');
+      cy.get('#batches_0_initialQuantity').slowType('20000');
+      cy.get('#batches_0_cost').slowType('20000');
       cy.get('input#imageIds').attachFile('vietnam.png');
       cy.get('.ant-upload-list').should('contain', 'vietnam.png');
 
@@ -193,9 +197,8 @@ describe('Stocking Flow', () => {
     cy.get('.ant-modal').within(() => {
       cy.get('input#imageIds').attachFile('vietnam.png');
       cy.wait(1000);
-      cy.get('#batches_0_cost').clear();
-      cy.get('#batches_0_cost').type('24000');
-      cy.get('#note').type('test note');
+      cy.get('#batches_0_cost').clear().slowType('24000');
+      cy.get('#note').slowType('test note');
     });
 
     cy.get('.ant-modal').within(() => {
@@ -207,7 +210,6 @@ describe('Stocking Flow', () => {
   });
 
   it('should find first record in table and click Transfer', () => {
-    cy.reload(true);
     cy.get('.ant-card')
       .contains('.ant-card-head-title', 'Stocking')
       .parents('.ant-card')
@@ -233,7 +235,7 @@ describe('Stocking Flow', () => {
     cy.get('#type').within(() => {
       cy.contains('Partial transfer').click({ force: true });
     });
-    cy.get('#quantity').type('1');
+    cy.get('#quantity').slowType('1');
 
     cy.selectDate('#transferDate', { day: '10' });
 

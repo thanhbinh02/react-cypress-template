@@ -45,6 +45,22 @@ import 'cypress-file-upload';
 // require('./commands')
 
 Cypress.Commands.add(
+  'slowType',
+  { prevSubject: ['element'] },
+  (subject: JQuery<HTMLElement>, text: string) => {
+    const delay = 100;
+    const typeChar = (index = 0): void => {
+      if (index < text.length) {
+        cy.wrap(subject)
+          .type(text[index], { delay })
+          .then(() => typeChar(index + 1));
+      }
+    };
+    typeChar();
+  }
+);
+
+Cypress.Commands.add(
   'typeAndBlur',
   { prevSubject: 'element' },
   (subject, value: string) => {

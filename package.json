@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "cypress": "npx cypress open"
+    "cypress": "npx cypress open --browser chrome",
+    "e2e:chrome": "npx cypress open --e2e --browser chrome"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.4",

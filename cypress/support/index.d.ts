@@ -20,6 +20,7 @@ declare global {
           year?: string;
         }
       ): Chainable<void>;
+      slowType(text: string, delay?: number): Chainable<Subject>;
     }
   }
 }

@@ -27,8 +27,8 @@ export const login = (
 
   const languageData = Cypress.env('languageData');
 
-  cy.get('#username').clear().type(username);
-  cy.get('#password').clear().type(password);
+  cy.get('#username').clear().slowType(username);
+  cy.get('#password').clear().slowType(password);
   cy.get("button[type='submit']").click();
   if (isSaved) {
     cy.window().its('sessionStorage.savedData').should('exist');
@@ -45,11 +45,10 @@ export const logout = () => {
     const yesText = languageData?.['common.yes'];
     const logoutText = languageData?.['common.logout'];
 
-    const clientInfo = localStorageData[Cypress.env('page')]['aqua_client_info'];
+    const clientInfo =
+      localStorageData[Cypress.env('page')]['aqua_client_info'];
     if (clientInfo) {
-      const parsedClientInfo: AquaClientInfo = JSON.parse(
-        clientInfo as string
-      );
+      const parsedClientInfo: AquaClientInfo = JSON.parse(clientInfo as string);
       cy.log('Parsed Client Info:', parsedClientInfo);
 
       if (parsedClientInfo.memberName) {
@@ -83,9 +82,7 @@ export const selectCountryAndLanguage = () => {
   cy.wait(300);
 
   cy.get('#language').click();
-  cy.get(
-    '.ant-select-dropdown .rc-virtual-list-holder-inner .ant-select-item'
-  )
+  cy.get('.ant-select-dropdown .rc-virtual-list-holder-inner .ant-select-item')
     .contains('English')
     .click({ force: true });
 
@@ -104,4 +101,4 @@ interface AquaClientInfo {
 
 Cypress.Commands.add('login', login);
 Cypress.Commands.add('logout', logout);
-Cypress.Commands.add('selectCountryAndLanguage', selectCountryAndLanguage); 
+Cypress.Commands.add('selectCountryAndLanguage', selectCountryAndLanguage);
