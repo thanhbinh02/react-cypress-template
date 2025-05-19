@@ -11,7 +11,9 @@ export default defineConfig({
     },
   },
   e2e: {
+    projectId: 'bzew3n',
     supportFile: 'cypress/support/e2e.ts',
     testIsolation: false,
+    specPattern: 'cypress/e2e/pages/**/*.cy.ts',
   },
 });
