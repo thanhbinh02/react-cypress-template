@@ -9,7 +9,9 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "cypress": "npx cypress open --browser chrome",
-    "e2e:chrome": "npx cypress open --e2e --browser chrome"
+    "e2e:chrome": "npx cypress open --e2e --browser chrome",
+    "e2e:run": "cypress run --e2e --browser chrome",
+    "e2e:report": "yarn e2e:run && open cypress/results/mochawesome.html"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.4",
@@ -27,6 +29,7 @@
     "@vitejs/plugin-react": "^4.3.4",
     "cypress": "^14.0.2",
     "cypress-file-upload": "^5.0.8",
+    "cypress-mochawesome-reporter": "^3.8.2",
     "eslint": "^9.19.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.18",

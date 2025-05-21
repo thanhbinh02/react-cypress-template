@@ -47,16 +47,17 @@ import 'cypress-file-upload';
 Cypress.Commands.add(
   'slowType',
   { prevSubject: ['element'] },
-  (subject: JQuery<HTMLElement>, text: string) => {
-    const delay = 100;
-    const typeChar = (index = 0): void => {
+  (subject: JQuery<HTMLElement>, text: string, delay = 100) => {
+    const typeChar = (index = 0): Cypress.Chainable => {
       if (index < text.length) {
-        cy.wrap(subject)
+        return cy
+          .wrap(subject)
           .type(text[index], { delay })
           .then(() => typeChar(index + 1));
       }
+      return cy.wrap(subject);
     };
-    typeChar();
+    return typeChar();
   }
 );
 
